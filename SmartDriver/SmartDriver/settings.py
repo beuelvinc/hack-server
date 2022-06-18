@@ -101,7 +101,7 @@ else:
             'USER': 'myprojectuser',
             'PASSWORD': 'password',
             'HOST': '164.92.243.115',
-            'PORT': '',
+            'PORT': 5432,
         }
     }
 
