@@ -33,6 +33,12 @@ class DashConsumer(AsyncJsonWebsocketConsumer):
         except:
             return 0
 
+    @sync_to_async
+    def return_user_email(self,user_id):
+        try:
+            return User.objects.filter(id=user_id).first().email
+        except:
+            return 0
 
     async def receive(self, text_data):
         datapoint = json.loads(text_data)
@@ -48,11 +54,14 @@ class DashConsumer(AsyncJsonWebsocketConsumer):
                 user_id=access_token.get('user_id')
                 print(user_id,x,y,z)
                 await self.aync_create(user_id,timestamp,x,y,z)
+                datapoint.pop("token")
+                datapoint['user_id']=user_id
+                datapoint['user_email']=await self.return_user_email(user_id)
                 await self.channel_layer.group_send(
                     self.groupname,
                     {
                         'type':'deprocessing', #function name to run
-                        'value':json.dumps(datapoint.pop("token"))  #value to send function
+                        'value':json.dumps(datapoint)  #value to send function
                     }
                 )
         else:
@@ -60,4 +69,4 @@ class DashConsumer(AsyncJsonWebsocketConsumer):
 
     async def deprocessing(self,event):
         valOther=event['value']
-        await self.send(text_data=json.dumps({'data':valOther}))# send for frontend
+        await self.send(text_data=json.dumps(valOther))# send for frontend

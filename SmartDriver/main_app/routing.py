@@ -8,5 +8,3 @@ websocket_urlPattern = [
     path('ws/insert', DashConsumer.as_asgi()), # add ws for prefix.
 ]
 
-
-
