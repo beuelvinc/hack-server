@@ -1,0 +1,10 @@
+.main {
+    padding: 20;
+    /* background-color: #f5f5f5; */
+    font-family: 'Poppins';
+}
+
+.image {
+    width: 2;
+    height: 2;
+}
