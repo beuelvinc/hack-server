@@ -4,3 +4,5 @@ hack-server/smart-driver/  -- web front-end react app  (react)  (web)
 
 
 hack-server/smartwheelsnew/  ---  mobile  react-native app  (react-native) (mobile)
+
+SERVER (http://164.92.243.115/)  should be run manually , There was  no time to deploy properly :DDD
